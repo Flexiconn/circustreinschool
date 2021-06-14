@@ -12,30 +12,14 @@ namespace circustrein
         {
             List<Animal> AnimalList = new List<Animal>();
 
-            AnimalList.Add(new Animal() { carnivore = true, grote = (int)grotes.large });
-            AnimalList.Add(new Animal() { carnivore = true, grote = (int)grotes.large });
-            AnimalList.Add(new Animal() { carnivore = true, grote = (int)grotes.large });
-            AnimalList.Add(new Animal() { carnivore = true, grote = (int)grotes.small });
-            AnimalList.Add(new Animal() { carnivore = true, grote = (int)grotes.medium });
-            AnimalList.Add(new Animal() { carnivore = false, grote = (int)grotes.large });
-            AnimalList.Add(new Animal() { carnivore = false, grote = (int)grotes.large });
-            AnimalList.Add(new Animal() { carnivore = false, grote = (int)grotes.small });
-            AnimalList.Add(new Animal() { carnivore = false, grote = (int)grotes.medium });
-            AnimalList.Add(new Animal() { carnivore = false, grote = (int)grotes.small });
-            AnimalList.Add(new Animal() { carnivore = false, grote = (int)grotes.medium });
-            AnimalList.Add(new Animal() { carnivore = false, grote = (int)grotes.small });
-            AnimalList.Add(new Animal() { carnivore = true, grote = (int)grotes.large });
-            AnimalList.Add(new Animal() { carnivore = true, grote = (int)grotes.large });
-            AnimalList.Add(new Animal() { carnivore = true, grote = (int)grotes.large });
-            AnimalList.Add(new Animal() { carnivore = true, grote = (int)grotes.small });
-            AnimalList.Add(new Animal() { carnivore = true, grote = (int)grotes.medium });
-            AnimalList.Add(new Animal() { carnivore = false, grote = (int)grotes.large });
-            AnimalList.Add(new Animal() { carnivore = false, grote = (int)grotes.large });
-            AnimalList.Add(new Animal() { carnivore = false, grote = (int)grotes.small });
-            AnimalList.Add(new Animal() { carnivore = false, grote = (int)grotes.medium });
-            AnimalList.Add(new Animal() { carnivore = false, grote = (int)grotes.small });
-            AnimalList.Add(new Animal() { carnivore = false, grote = (int)grotes.medium });
-            AnimalList.Add(new Animal() { carnivore = false, grote = (int)grotes.small });
+            AnimalList.Add(new Animal(AnimalType.Carnivore, Grotes.large));
+            AnimalList.Add(new Animal(AnimalType.Herbivore, Grotes.large));
+            AnimalList.Add(new Animal(AnimalType.Herbivore, Grotes.large));
+            AnimalList.Add(new Animal(AnimalType.Herbivore, Grotes.large));
+            AnimalList.Add(new Animal(AnimalType.Carnivore, Grotes.small));
+            AnimalList.Add(new Animal(AnimalType.Carnivore, Grotes.medium));
+            AnimalList.Add(new Animal(AnimalType.Carnivore, Grotes.small));
+
 
             return AnimalList;
         }

@@ -9,6 +9,7 @@ namespace circustrein
     public class Wagon
     {
         private List<Animal> Animals { get; set; }
+        private int plaats { get { return 10; } }
 
         public Wagon()
         {
@@ -18,7 +19,7 @@ namespace circustrein
         {
             foreach (var t in Animals) 
             {
-                if (t.carnivore == true)
+                if (t.GetAnimalType() == AnimalType.Carnivore)
                     return t;
                 else
                     return null;
@@ -29,18 +30,42 @@ namespace circustrein
         public int ReturnPlaats() {
             int plaats = 0;
             foreach (Animal animal in Animals) {
-                plaats += animal.grote;
+                plaats += (int)animal.GetSize();
             }
             return plaats;
         }
 
-        public void addAnimal(Animal animal) 
+        public bool TryAddingAnimal(Animal animal) {
+            if ((plaats - ReturnPlaats()) >= (int)animal.GetSize())
+            {
+                foreach (Animal animalTest in Animals)
+                {
+                    if (!animalTest.CheckIfCompatible(animal))
+                    {
+                        return false;
+                    }
+                }
+                AddAnimal(animal);
+                return true;
+            }
+            else {
+                return false;
+
+            }
+        }
+
+        private void AddAnimal(Animal animal) 
         {
             Animals.Add(animal);
         }
 
         public IEnumerable<Animal> GetAnimals() {
             return Animals;
+        }
+
+        public Wagon(Animal animal) {
+            Animals = new List<Animal>();
+            AddAnimal(animal);
         }
     }
 }

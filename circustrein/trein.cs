@@ -12,88 +12,69 @@ namespace circustrein
         private List<Wagon> Wagons { get; set; }
         public string Naampie { get; set; }
 
-        
         public trein() 
         {
             Wagons = new List<Wagon>();
+        }
+
+        public void FillWagons(List<Animal> animals)
+        {
+            animals = OrderAnimalList(animals);
+            foreach (Animal animal in AddCarnivoreWagons(animals))
+            {
+                animals.Remove(animal);
+            }
+
+            animals = OrderAnimalList(animals);
+            foreach (Animal animal in AddHerbivores(animals))
+            {
+                Console.WriteLine(animal.GetSize() + " " + animal.GetAnimalType());
+
+                animals.Remove(animal);
+            }
         }
 
         public IEnumerable<Wagon> GetTreinList() {
             return Wagons;
         }
 
-        public void CreateWagon() {
-            Wagons.Add(new Wagon());
-        }
-
-        public void AddAnimalToWagon(int index)
+        private List<Animal> AddCarnivoreWagons(List<Animal> animals)
         {
-            Wagons[index].addAnimal(new Animal());
-        }
-
-        public void TreinAddAtIndex(int index, Animal animal) {
-            Wagons[index].addAnimal(animal);
-        }
-
-        public void fill(List<Animal> animals) {
-            animals = animals.OrderByDescending(o => o.grote).ToList();
-            foreach (Animal animal in animals.ToList()) {
-                if (animal.carnivore == true) {
-                    Wagons.Add(new Wagon());
-                    Wagons[Wagons.Count - 1].addAnimal(animal);
-                    animals.Remove(animal);
+            List<Animal> AnimalsToRemove = new List<Animal>();
+            foreach (Animal animal in animals) {
+                if (animal.GetAnimalType() == AnimalType.Carnivore)
+                    {
+                    Wagons.Add(new Wagon(animal));
+                    AnimalsToRemove.Add(animal);
+                    }
                 }
-            }
+            return AnimalsToRemove;
+        }
 
-            animals = animals.OrderByDescending(o => o.grote).ToList();
-            foreach (Animal Animal in animals.ToList())
-            {
+        private List<Animal> OrderAnimalList(List<Animal> animals) {
+            return animals.OrderByDescending(o => o.GetSize()).ToList();
+        }
+
+        private List<Animal> AddHerbivores(List<Animal> animals) {
+            List<Animal> AnimalsToRemove = new List<Animal>();
+            foreach (Animal animal in animals) {
+                bool added = false;
                 foreach (var wagon in Wagons.ToList())
                 {
-                    if (wagon.getcarnivore().grote >= Animal.grote)
+                    if (wagon.TryAddingAnimal(animal))
                     {
-                        continue;
-                    }else if (10 - wagon.ReturnPlaats() >= Animal.grote)
-                    {
-                        wagon.addAnimal(Animal);
-                        animals.Remove(Animal);
+                        added = true;
                         break;
                     }
                 }
-            }
-
-            animals = animals.OrderByDescending(o => o.grote).ToList();
-            foreach (Animal animal in animals.ToList())
-            {
-                foreach (Wagon wagon in Wagons.ToList())
-                {
-                    if (wagon.getcarnivore() != null && wagon != Wagons[Wagons.Count - 1]) {
-                        continue;
-                    }
-                    if (10 - wagon.ReturnPlaats() >= animal.grote && wagon.getcarnivore() == null)
-                    {
-                        wagon.addAnimal(animal);
-                        animals.Remove(animal);
-                        break;
-                    }
-                    else
-                    {
-                        if (10 - Wagons[Wagons.Count - 1].ReturnPlaats() >= animal.grote && wagon.getcarnivore() == null)
-                        {
-
-                            Wagons[Wagons.Count - 1].addAnimal(animal);
-                            animals.Remove(animal);
-                        }
-                        else {
-
-                            Wagons.Add(new Wagon());
-                            Wagons[Wagons.Count - 1].addAnimal(animal);
-                            animals.Remove(animal);
-                        }
-                        break;
-                    }
+                if (added == false) {
+                    Wagons.Add(new Wagon(animal));
+                    AnimalsToRemove.Add(animal);
                 }
             }
+            return AnimalsToRemove;
         }
+
+        
     }
 }
