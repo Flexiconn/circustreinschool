@@ -16,12 +16,19 @@ namespace circustrein
         {
             if (this.type == AnimalType.Carnivore)
             {
-                if (animal.grote > this.grote)
+                if (AnimalType.Carnivore == animal.GetAnimalType())
                 {
-                    return true;
+                    return false;
                 }
                 else {
-                    return false;
+                    if (animal.grote > this.grote)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
             else {

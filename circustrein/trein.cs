@@ -57,17 +57,10 @@ namespace circustrein
 
         private List<Animal> AddHerbivores(List<Animal> animals) {
             List<Animal> AnimalsToRemove = new List<Animal>();
-            foreach (Animal animal in animals) {
-                bool added = false;
-                foreach (var wagon in Wagons.ToList())
+            foreach (Animal animal in animals)
+            {
+                if (TryAddingAnimal(animal) == false)
                 {
-                    if (wagon.TryAddingAnimal(animal))
-                    {
-                        added = true;
-                        break;
-                    }
-                }
-                if (added == false) {
                     Wagons.Add(new Wagon(animal));
                     AnimalsToRemove.Add(animal);
                 }
@@ -75,6 +68,17 @@ namespace circustrein
             return AnimalsToRemove;
         }
 
-        
+        private bool TryAddingAnimal(Animal animal)
+        {
+            foreach (var wagon in Wagons.ToList())
+            {
+                if (wagon.TryAddingAnimal(animal))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
     }
 }

@@ -15,6 +15,7 @@ namespace circustrein
         {
             Animals = new List<Animal>();
         }
+
         public Animal getcarnivore() 
         {
             foreach (var t in Animals) 

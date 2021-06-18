@@ -12,10 +12,18 @@ namespace TestProject1
     public class TreinTest
     {
         [TestMethod]
-        public void GetCarnivore_CarnivorePresent() {
-            Wagon wagon = new Wagon(new Animal(AnimalType.Carnivore, Grotes.large));
+        public void FillWagons() {
+            trein trein = new trein();
+            trein.FillWagons(new List<Animal>() {
+                new Animal(AnimalType.Carnivore, Grotes.large),
+                new Animal(AnimalType.Carnivore, Grotes.medium),
+                new Animal(AnimalType.Carnivore, Grotes.small),
+                new Animal(AnimalType.Herbivore, Grotes.large),
+                new Animal(AnimalType.Herbivore, Grotes.medium),
+                new Animal(AnimalType.Herbivore, Grotes.small),
 
-            var ret = wagon.getcarnivore();
+            });
+            var ret = trein.GetTreinList();
             Assert.IsNotNull(ret);
         }
     }

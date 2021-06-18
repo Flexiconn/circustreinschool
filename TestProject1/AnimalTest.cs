@@ -13,40 +13,40 @@ namespace TestProject1
     {
         [TestMethod]
         public void CheckIfCompatible_TwoCarnivore() {
-            var carnivore1 = new Animal(AnimalType.Carnivore, Grotes.large);
-            var carnivore2 = new Animal(AnimalType.Carnivore, Grotes.large);
+            var animal1 = new Animal(AnimalType.Carnivore, Grotes.large);
+            var animal2 = new Animal(AnimalType.Carnivore, Grotes.large);
 
-            var ret = carnivore1.CheckIfCompatible(carnivore2);
+            var ret = animal1.CheckIfCompatible(animal2);
             Assert.IsFalse(ret);
         }
 
         [TestMethod]
         public void CheckIfCompatible_SmallCarnivore_BigHerbivore()
         {
-            var carnivore1 = new Animal(AnimalType.Carnivore, Grotes.small);
-            var carnivore2 = new Animal(AnimalType.Herbivore, Grotes.large);
+            var animal1 = new Animal(AnimalType.Carnivore, Grotes.small);
+            var animal2 = new Animal(AnimalType.Herbivore, Grotes.large);
 
-            var ret = carnivore1.CheckIfCompatible(carnivore2);
+            var ret = animal1.CheckIfCompatible(animal2);
             Assert.IsTrue(ret);
         }
 
         [TestMethod]
         public void CheckIfCompatible_BigCarnivore_SmallHerbivore()
         {
-            var carnivore1 = new Animal(AnimalType.Herbivore, Grotes.small);
-            var carnivore2 = new Animal(AnimalType.Carnivore, Grotes.large);
+            var animal1 = new Animal(AnimalType.Herbivore, Grotes.small);
+            var animal2 = new Animal(AnimalType.Carnivore, Grotes.large);
 
-            var ret = carnivore1.CheckIfCompatible(carnivore2);
-            Assert.IsFalse(ret);
+            var ret = animal1.CheckIfCompatible(animal2);
+            Assert.IsTrue(ret);
         }
 
         [TestMethod]
         public void CheckIfCompatible_TwoHerbivore()
         {
-            var carnivore1 = new Animal(AnimalType.Herbivore, Grotes.large);
-            var carnivore2 = new Animal(AnimalType.Herbivore, Grotes.large);
+            var animal1 = new Animal(AnimalType.Herbivore, Grotes.large);
+            var animal2 = new Animal(AnimalType.Herbivore, Grotes.large);
 
-            var ret = carnivore1.CheckIfCompatible(carnivore2);
+            var ret = animal1.CheckIfCompatible(animal2);
             Assert.IsTrue(ret);
         }
     }
